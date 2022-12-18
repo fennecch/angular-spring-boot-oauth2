@@ -16,7 +16,7 @@ v18.12.1<br />
 #commandLine: npm --v<br />
 8.19.2<br />
 install npm <br />
-#commandLine: npm install -g @angular/cli<br /><br />
+#commandLine: npm install -g @angular/cli<br />
 
 <b>on windows 10/11 execute</b><br />
 #commandLine: Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force<br />
