@@ -56,11 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/oauth/token").permitAll()
-                .anyRequest().authenticated();
-        http.cors().disable();
-        http.csrf().disable();
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.httpBasic().realmName(securityRealm);
+                .anyRequest().authenticated().and()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .httpBasic().realmName(securityRealm);
     }
     
     @Bean
