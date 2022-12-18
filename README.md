@@ -17,7 +17,7 @@ v18.12.1
 8.19.2
 install npm 
 #commandLine: npm install -g @angular/cli
-
+<br />
 on windows 10/11 execute
 #commandLine: Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
 
