@@ -9,17 +9,12 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
  
-  oauth2LoginUrl: string;
-  
-
   loginForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl('')    
   });
 
-  constructor(private http:HttpClient) { 
-    this.oauth2LoginUrl = "http://justgivemeatoken:uJqRnKsEgIdRo8102@localhost:8080/oauth/token?grant_type=password"
-  }
+  constructor(private http:HttpClient) {}
 
   ngOnInit() {
   }
@@ -35,16 +30,14 @@ export class LoginComponent implements OnInit {
       })
     };
 
-    console.log("form value : " + this.loginForm.value.username);
-    console.log("form value : " + this.loginForm.value.password);
-
     const body = new HttpParams()
       .set('username', '' + this.loginForm.value.username)
       .set('password', '' + this.loginForm.value.password)
       .set('grant_type', 'password');
 
-    this.http.post<any>(API_URL + 'oauth/token', body, HTTP_OPTIONS).subscribe((res:any) => {
-        console.log(res.access_token);
+    this.http.post<any>(API_URL + 'oauth/token', body, HTTP_OPTIONS).subscribe((res:any) => {        
+        localStorage.setItem('token', res.access_token)
+        window.parent.postMessage(res.access_token, '*');
     });       
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +6,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app-login';
+
+  logout() {
+    localStorage.removeItem('token');
+    window.parent.postMessage(localStorage.getItem('token'), '*'); 
+  }
+
+  isLoggedIn() {
+    if (localStorage.getItem('token'))
+      return true;
+    return false;
+  } 
+
+  @HostListener('window:message', ['$event'])
+  isLoggedInListenner(event: MessageEvent) {  
+    console.log("app-login - token : " + localStorage.getItem('token'));  
+    window.parent.postMessage(localStorage.getItem('token'), '*');        
+  }
+  
 }
